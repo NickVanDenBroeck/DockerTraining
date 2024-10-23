@@ -20,14 +20,14 @@ jobs:
       - name: Build Docker Image
         run: |
           git_hash=$(git rev-parse --short HEAD)
-          docker build . -t ghcr.io/NickVanDenBroeck/DockerTraining/project-api:$git_hash
+          docker build . -t ghcr.io/NickVanDenBroeck/dockertraining/project-api:$git_hash
 
       - name: Test Docker Image
         run: |
           git_hash=$(git rev-parse --short HEAD)
           docker run \
           --entrypoint=/bin/bash \
-          ghcr.io/NickVanDenBroeck/DockerTraining/project-api:$git_hash \
+          ghcr.io/NickVanDenBroeck/dockertraining/project-api:$git_hash \
           ./script/test
 
       - name: Docker Login to GitHub Container Registry
@@ -37,4 +37,4 @@ jobs:
       - name: Push Docker Image to GitHub Packages
         run: |
           git_hash=$(git rev-parse --short HEAD)
-          docker push ghcr.io/NickVanDenBroeck/DockerTraining/project-api:$git_hash
+          docker push ghcr.io/NickVanDenBroeck/dockertraining/project-api:$git_hash
